@@ -9,13 +9,11 @@ import see.comm.ChannelAction;
 import see.comm.ChannelTouchPressed;
 import see.events.TouchPress;
 import see.events.TouchPressed;
-import see.playback.Recorder;
 import see.robot.Robot;
 
 public class DoReplay implements Behavior {
 
 	private ChannelTouchPressed channelTouchPressed;
-	private Recorder recorder;
 	private ChannelAction channelAction;
 	private boolean suppressed = false;
 	private Logger logger = Logger.getLogger("see");
@@ -24,20 +22,21 @@ public class DoReplay implements Behavior {
 	public DoReplay(Robot robot) {
 		super();
 		this.channelTouchPressed = (ChannelTouchPressed) robot.getTouchSensor().channel();
-		this.recorder = robot.getRecorder();
 		this.channelAction = (ChannelAction) robot.getDifferentialRobotMotor().channel();
 		this.robot = robot;
 	}
 	
 	@Override
 	public boolean takeControl() {
+		
+		suppressed = robot.checkIfStopped();
+		
 		if(robot.getMode() != Mode.REPLAY) {
 			boolean control = false;
 			TouchPressed detected = channelTouchPressed.read(); 
 			if(detected.occurred()) {
 				if(detected.getEvent() == TouchPress.PRESSED) {
 					control = true;
-					logger.info("Switching to replay mode");
 					robot.setMode(Mode.REPLAY);
 				}
 			}
@@ -49,7 +48,6 @@ public class DoReplay implements Behavior {
 
 	@Override
 	public void action() {
-		logger.info("Replaying");
 		while(robot.getRecorder().hasNext()) {
 			Action action = robot.getRecorder().next();
 			if(suppressed) {

@@ -8,6 +8,7 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
 import see.actions.MockActionMap;
+import see.actions.witherrors.MockActionMapWithError;
 import see.events.TouchPress;
 import see.motors.DifferentialRobotMotor;
 import see.playback.Recorder;
@@ -30,14 +31,14 @@ public class MockRobotFactory {
 	
 	public Robot create() throws InterruptedException {
 		
-		Robot robot = new Robot();
+		Robot robot = Robot.create();
 		Recorder recorder = new Recorder();
 		MockActionMap actionMap = new MockActionMap();
 		SensorMap sensorMap = new SensorMap();
 		
-		MockColorSensor colorSensor = new MockColorSensor(colorQ);
-		MockTouchSensor touchSensor = new MockTouchSensor(touchQ);
-		MockDistanceSensor distanceSensor = new MockDistanceSensor(distQ);
+		MockColorSensor colorSensor = new MockColorSensor(robot, colorQ);
+		MockTouchSensor touchSensor = new MockTouchSensor(robot, touchQ);
+		MockDistanceSensor distanceSensor = new MockDistanceSensor(robot, distQ);
 		DifferentialRobotMotor differentialRobotMotor = new DifferentialRobotMotor();
 		
 		robot.setDifferentialRobotMotor(differentialRobotMotor);
@@ -48,6 +49,13 @@ public class MockRobotFactory {
 		robot.setActionMap(actionMap);
 		robot.setSensorMap(sensorMap);
 		robot.setLogger(createLogger());
+		return robot;
+	}
+	
+	public Robot createWithErrorInForward() throws InterruptedException {
+		Robot robot = create();
+		MockActionMapWithError actionMap = new MockActionMapWithError();
+		robot.setActionMap(actionMap);
 		return robot;
 	}
 	

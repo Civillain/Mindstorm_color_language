@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import lejos.robotics.subsumption.Behavior;
 import see.actions.Action;
-import see.actions.MockActionMap;
+import see.actions.ActionMap;
 import see.comm.ChannelAction;
 import see.comm.ChannelColorDetected;
 import see.events.ColorDetected;
@@ -16,7 +16,7 @@ public class DoRecord implements Behavior {
 
 	private ChannelColorDetected channelColorDetected;
 	private ChannelAction channelAction;
-	private MockActionMap actionMap;
+	private ActionMap actionMap;
 	private Recorder recorder;
 	private boolean suppressed = false;
 	private Robot robot;
@@ -33,17 +33,17 @@ public class DoRecord implements Behavior {
 
 	@Override
 	public boolean takeControl() {
+		
+		suppressed = robot.checkIfStopped();
+		
 		if(robot.getMode() == Mode.IDLE) {
 			robot.setMode(Mode.RECORD);
-			return true;
-		} else {
-			return false;
 		}
+		return true;
 	}
 
 	@Override
 	public void action() {
-		logger.info("Recording");
 		while(!suppressed) {
 			ColorDetected detected = channelColorDetected.read();
 			if(detected.occurred()) {

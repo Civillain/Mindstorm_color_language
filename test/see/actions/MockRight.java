@@ -8,7 +8,7 @@ public class MockRight extends AbstractAction {
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
 		logger.info("Right");
-		
+		Thread.sleep(100);
 	}
 	
 	@Override

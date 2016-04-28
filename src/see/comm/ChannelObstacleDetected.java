@@ -1,16 +1,11 @@
 package see.comm;
 
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.TransferQueue;
-
 import see.events.ObstacleDetected;
 
-public class ChannelObstacleDetected implements Channel<ObstacleDetected> {
+public class ChannelObstacleDetected extends AbstractChannel<ObstacleDetected> {
 
-	private TransferQueue<ObstacleDetected> channel;
-	
 	public ChannelObstacleDetected() {
-		channel = new LinkedTransferQueue<>();
+		super();
 	}
 	
 	@Override

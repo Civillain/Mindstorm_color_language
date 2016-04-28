@@ -15,7 +15,8 @@ public class DistanceSensor extends Sensor<ObstacleDetected>  {
 	private float[] sample;
 	private float distanceToDetectObstacle = 0.2f; // 1.0f equals roughly 1 meter
 	
-	public DistanceSensor() {
+	public DistanceSensor(Robot robot) {
+		super(robot);
 		this.channelObstacleDetcted = new ChannelObstacleDetected();
 	}
 	

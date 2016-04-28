@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import lejos.hardware.BrickFinder;
+import lejos.hardware.Button;
+import lejos.hardware.Sound;
+import lejos.hardware.lcd.Font;
+import lejos.hardware.lcd.GraphicsLCD;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
-import see.actions.MockActionMap;
+import lejos.utility.Delay;
+import see.actions.ActionMap;
 import see.behaviours.DoRecord;
 import see.behaviours.DoReplay;
 import see.behaviours.Mode;
@@ -17,7 +23,7 @@ import see.sensors.DistanceSensor;
 import see.sensors.SensorMap;
 import see.sensors.TouchSensor;
 
-public class Robot implements Connectable {
+public final class Robot implements Connectable {
 
 	private TouchSensor touchSensor;
 	private ColorSensor colorSensor;
@@ -26,12 +32,21 @@ public class Robot implements Connectable {
 	private DifferentialRobotMotor differentialRobotMotor;
 	private List<Connectable> devices;
 	private List<Thread> processes;
-	private MockActionMap actionMap;
+	private ActionMap actionMap;
 	private SensorMap sensorMap;
 	private Logger logger;
 	private Mode mode = Mode.IDLE;
+	private static Robot ROBOT = null;
+	private boolean connected = false;
 	
-	public Robot() {
+	public static synchronized Robot create() {
+		if(ROBOT == null) {
+			ROBOT = new Robot();
+		}
+		return ROBOT;
+	}
+	
+	private Robot() {
 		this.devices = new ArrayList<>();
 		this.processes = new ArrayList<>();
 	}
@@ -51,6 +66,7 @@ public class Robot implements Connectable {
 		Behavior [] behaviors = new Behavior [] {doRecord, doReplay};
 		Arbitrator arbitrator = new Arbitrator(behaviors);
 		arbitrator.start();
+		logger.info("Arbitrator finished");
 	}
 	
 	public DifferentialRobotMotor getDifferentialRobotMotor() {
@@ -99,11 +115,11 @@ public class Robot implements Connectable {
 	}
 	
 	
-	public MockActionMap getActionMap() {
+	public ActionMap getActionMap() {
 		return actionMap;
 	}
 
-	public void setActionMap(MockActionMap actionMap) {
+	public void setActionMap(ActionMap actionMap) {
 		this.actionMap = actionMap;
 	}
 
@@ -120,6 +136,20 @@ public class Robot implements Connectable {
 		logger.info("Connecting Robot");
 		sensorMap.connect(robot);
 		devices.forEach(device -> device.connect(robot));
+		connected = true;
+		intro();
+	}
+	
+	private void intro() {
+		GraphicsLCD g = BrickFinder.getDefault().getGraphicsLCD();
+        final int SW = g.getWidth();
+        final int SH = g.getHeight();
+        setLEDPattern(1);
+        Sound.beepSequenceUp();
+        
+        g.setFont(Font.getLargeFont());
+        g.drawString("leJOS/EV3 Color Language", SW/2, SH/2, GraphicsLCD.BASELINE|GraphicsLCD.HCENTER);
+        Delay.msDelay(2000);
 	}
 	
 	public String getProperty(String key) {
@@ -134,10 +164,42 @@ public class Robot implements Connectable {
 	public synchronized void setMode(Mode mode) {
 		logger.info("Mode: " + mode.toString());
 		this.mode = mode;
+		if(mode == Mode.RECORD) {
+			setLEDPattern(2); // static red 
+		} else if (mode == Mode.REPLAY) {
+			setLEDPattern(4); // blink green
+		} else {
+			setLEDPattern(3); // static yellow
+		}
 	}
 
 	public synchronized Mode getMode() {
 		return mode;
+	}
+	
+	public synchronized boolean checkIfStopped() {
+		if(!connected) return false;
+		if (Button.readButtons() != 0) {
+			logger.info("Stopping motors");
+	        getDifferentialRobotMotor().stop();
+	        setLEDPattern(8); // fast blink red
+	        Button.discardEvents();
+	        if ((Button.waitForAnyPress() & Button.ID_ESCAPE) != 0) {
+	        	logger.info("Stopping robot");
+	        	Sound.beepSequence();
+	        	setLEDPattern(0); // clear leds
+	        	System.exit(0);
+	        }
+	        Button.waitForAnyEvent();
+	        return true;
+	    } else {
+	    	return false;
+	    }
+	}
+	
+	private void setLEDPattern(int pattern) {
+		if(!connected) return;
+		Button.LEDPattern(pattern);
 	}
 	
 }

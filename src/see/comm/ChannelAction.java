@@ -1,17 +1,12 @@
 package see.comm;
 
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.TransferQueue;
-
 import see.actions.Action;
 import see.actions.NoAction;
 
-public class ChannelAction implements Channel<Action> {
-
-	private TransferQueue<Action> channel;
+public class ChannelAction extends AbstractChannel<Action> {
 	
 	public ChannelAction() {
-		channel = new LinkedTransferQueue<>();
+		super();
 	}
 	
 	@Override

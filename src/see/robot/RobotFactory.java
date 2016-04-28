@@ -5,7 +5,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
-import see.actions.MockActionMap;
+import see.actions.ActionMap;
+import see.actions.ActionMapImpl;
 import see.motors.DifferentialRobotMotor;
 import see.playback.Recorder;
 import see.sensors.ColorSensor;
@@ -16,12 +17,12 @@ import see.sensors.TouchSensor;
 public class RobotFactory {
 	
 	public Robot create() {
-		Robot robot = new Robot();
+		Robot robot = Robot.create();
 		Recorder recorder = new Recorder();
-		MockActionMap actionMap = new MockActionMap();
-		ColorSensor colorSensor = new ColorSensor();
-		TouchSensor touchSensor = new TouchSensor();
-		DistanceSensor distanceSensor = new DistanceSensor();
+		ActionMap actionMap = new ActionMapImpl();
+		ColorSensor colorSensor = new ColorSensor(robot);
+		TouchSensor touchSensor = new TouchSensor(robot);
+		DistanceSensor distanceSensor = new DistanceSensor(robot);
 		SensorMap sensorMap = new SensorMap();
 		DifferentialRobotMotor differentialRobotMotor = new DifferentialRobotMotor();
 		robot.setDifferentialRobotMotor(differentialRobotMotor);

@@ -28,6 +28,9 @@ public class DifferentialRobotMotor implements Motor<Action> {
 		logger.info("Connecting differential pilot");
 		DifferentialPilot pilot = new DifferentialPilot(getWheelDiameter(robot), getTrackWidth(robot), getLeftMotor(robot), getRightMotor(robot), getReverse(robot));
 		this.pilot = pilot;
+		pilot.setAcceleration(4000);
+		pilot.setTravelSpeed(20); // cm/sec
+		pilot.setRotateSpeed(180); // deg/sec
 	}
 	
 	@Override
@@ -44,10 +47,8 @@ public class DifferentialRobotMotor implements Motor<Action> {
 				action.perform(pilot);
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, "Error while performing: " + action.toString(), e.getCause());
-				break;
 			}
 		}
-		logger.info("Stopping motor: " + this.toString());
 	}
 	
 	@Override
@@ -82,6 +83,11 @@ public class DifferentialRobotMotor implements Motor<Action> {
 	private boolean getReverse(Robot robot) {
 		Boolean b = Boolean.valueOf(robot.getProperty("motor.reverse"));
 		return b.booleanValue();
+	}
+
+	@Override
+	public synchronized void stop() {
+		pilot.stop();
 	}
 	
 }

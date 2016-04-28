@@ -14,7 +14,8 @@ public class ColorSensor extends Sensor<ColorDetected> {
 	private ChannelColorDetected channelColorDetected;
 	private EV3ColorSensor colorSensor;
 	
-	public ColorSensor() {
+	public ColorSensor(Robot robot) {
+		super(robot);
 		this.channelColorDetected = new ChannelColorDetected();
 	}
 	

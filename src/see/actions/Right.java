@@ -8,7 +8,7 @@ public class Right extends AbstractAction {
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
 		logger.info("Right");
-		
+		pilot.rotateRight();
 	}
 	
 	@Override

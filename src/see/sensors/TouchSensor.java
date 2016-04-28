@@ -16,7 +16,8 @@ public class TouchSensor extends Sensor<TouchPressed>  {
 	private EV3TouchSensor touchSensor;
 	private float[] sample;
 	
-	public TouchSensor() {
+	public TouchSensor(Robot robot) {
+		super(robot);
 		this.channelTouchPressed = new ChannelTouchPressed();
 	}
 	

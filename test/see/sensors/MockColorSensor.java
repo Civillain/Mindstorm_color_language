@@ -3,12 +3,14 @@ package see.sensors;
 import java.util.Queue;
 
 import see.events.ColorDetected;
+import see.robot.Robot;
 
 public class MockColorSensor extends ColorSensor {
 	
 	private Queue<Integer> queue;
 	
-	public MockColorSensor(Queue<Integer> queue) {
+	public MockColorSensor(Robot robot, Queue<Integer> queue) {
+		super(robot);
 		this.queue = queue;
 	}
 	

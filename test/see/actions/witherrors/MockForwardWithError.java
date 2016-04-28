@@ -1,14 +1,15 @@
-package see.actions;
+package see.actions.witherrors;
 
 import lejos.robotics.navigation.DifferentialPilot;
+import see.actions.AbstractAction;
 
 // green
-public class Forward extends AbstractAction {
+public class MockForwardWithError extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
 		logger.info("Forward");
-		pilot.travel(10);
+		throw new Exception("Error while moving forward");
 	}
 	
 	@Override
