@@ -18,10 +18,15 @@ public class RobotTest {
 	@Test
 	public void testStartRobot() throws InterruptedException {
 		MockRobotFactory mockRobotFactory = new MockRobotFactory();
-		Robot robot = mockRobotFactory.create();
+		final Robot robot = mockRobotFactory.create();
 		
-		Runnable r = () -> {
-			robot.start();
+		Runnable r = new Runnable() {
+
+			@Override
+			public void run() {
+				robot.start();
+			}
+			
 		};
 		new Thread(r, "robot").start();
 		
@@ -52,10 +57,16 @@ public class RobotTest {
 	@Test
 	public void testStartRobotWithErrorInForward() throws InterruptedException {
 		MockRobotFactory mockRobotFactory = new MockRobotFactory();
-		Robot robot = mockRobotFactory.createWithErrorInForward();
 		
-		Runnable r = () -> {
-			robot.start();
+		final Robot robot = mockRobotFactory.createWithErrorInForward();
+		
+		Runnable r = new Runnable() {
+
+			@Override
+			public void run() {
+				robot.start();
+			}
+			
 		};
 		new Thread(r, "robot").start();
 		
@@ -85,10 +96,16 @@ public class RobotTest {
 	@Test
 	public void testStartRobotWithInvalidColor() throws InterruptedException {
 		MockRobotFactory mockRobotFactory = new MockRobotFactory();
-		Robot robot = mockRobotFactory.create();
 		
-		Runnable r = () -> {
-			robot.start();
+		final Robot robot = mockRobotFactory.create();
+		
+		Runnable r = new Runnable() {
+
+			@Override
+			public void run() {
+				robot.start();
+			}
+			
 		};
 		new Thread(r, "robot").start();
 		
@@ -114,13 +131,16 @@ public class RobotTest {
 	@Test
 	public void testRecordReplay() throws InterruptedException {
 		MockRobotFactory mockRobotFactory = new MockRobotFactory();
-		Robot robot = mockRobotFactory.create();
+		final Robot robot = mockRobotFactory.create();
 		
-		Runnable r = () -> {
-			robot.start();
+		Runnable r = new Runnable() {
+
+			@Override
+			public void run() {
+				robot.start();
+			}
+			
 		};
-		
-		
 		new Thread(r, "robot").start();
 
 		mockRobotFactory.colorQ.add(Color.BLUE);

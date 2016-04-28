@@ -8,7 +8,7 @@ public class MockForwardWithError extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Forward");
+		System.out.println("Forward");
 		throw new Exception("Error while moving forward");
 	}
 	

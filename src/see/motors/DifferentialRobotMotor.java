@@ -1,8 +1,5 @@
 package see.motors;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.Port;
@@ -17,7 +14,6 @@ public class DifferentialRobotMotor implements Motor<Action> {
 
 	private ChannelAction channelAction;
 	private DifferentialPilot pilot;
-	private Logger logger = Logger.getLogger("see");
 	
 	public DifferentialRobotMotor() {
 		this.channelAction = new ChannelAction(); 
@@ -25,7 +21,7 @@ public class DifferentialRobotMotor implements Motor<Action> {
 	
 	@Override
 	public void connect(Robot robot) {
-		logger.info("Connecting differential pilot");
+		System.out.println("Connecting differential pilot");
 		DifferentialPilot pilot = new DifferentialPilot(getWheelDiameter(robot), getTrackWidth(robot), getLeftMotor(robot), getRightMotor(robot), getReverse(robot));
 		this.pilot = pilot;
 		pilot.setAcceleration(4000);
@@ -40,13 +36,13 @@ public class DifferentialRobotMotor implements Motor<Action> {
 
 	@Override
 	public void run() {
-		logger.info("Starting motor: " + this.toString());
+		System.out.println("Starting motor: " + this.toString());
 		while(true) {
 			Action action = channelAction.read();
 			try {
 				action.perform(pilot);
 			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Error while performing: " + action.toString(), e.getCause());
+				System.err.println("Error while performing: " + action.toString() + " " +  e.getCause());
 			}
 		}
 	}

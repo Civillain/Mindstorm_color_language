@@ -9,7 +9,7 @@ public class MockToObstacle extends AbstractAction {
 	
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("ToObstacle");
+		System.out.println("ToObstacle");
 		Thread.sleep(500);
 	}
 	

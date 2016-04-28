@@ -6,7 +6,6 @@ public class MockNoAction extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		//logger.finest("NoAction");
 
 	}
 	

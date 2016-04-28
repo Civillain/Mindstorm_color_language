@@ -1,8 +1,5 @@
 package see.behaviours;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import lejos.robotics.subsumption.Behavior;
 import see.actions.Action;
 import see.actions.ActionMap;
@@ -20,7 +17,6 @@ public class DoRecord implements Behavior {
 	private Recorder recorder;
 	private boolean suppressed = false;
 	private Robot robot;
-	private Logger logger = Logger.getLogger("see");
 	
 	public DoRecord(Robot robot) {
 		super();
@@ -52,7 +48,7 @@ public class DoRecord implements Behavior {
 				try {
 					channelAction.write(action);
 				} catch (InterruptedException e) {
-					logger.log(Level.SEVERE, "Error while writing: " + action.toString(), e.getCause());
+					System.err.println("Error while writing: " + action.toString() + " " + e.getCause());
 					break;
 				}
 			}

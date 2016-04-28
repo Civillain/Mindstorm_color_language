@@ -6,7 +6,7 @@ public class Repeat extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Repeat");
+		System.out.println("Repeat");
 		
 	}
 	

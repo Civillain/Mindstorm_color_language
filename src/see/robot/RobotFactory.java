@@ -1,10 +1,5 @@
 package see.robot;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.StreamHandler;
-
 import see.actions.ActionMap;
 import see.actions.ActionMapImpl;
 import see.motors.DifferentialRobotMotor;
@@ -32,18 +27,7 @@ public class RobotFactory {
 		robot.setTouchSensor(touchSensor);
 		robot.setActionMap(actionMap);
 		robot.setSensorMap(sensorMap);
-		robot.setLogger(createLogger());
 		return robot;
 	}
 	
-	private Logger createLogger() {
-		System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$-6s %2$s %5$s%6$s%n");
-		Logger logger = Logger.getLogger("see");
-		logger.setUseParentHandlers(false);
-		logger.setLevel(Level.INFO);
-		SimpleFormatter fmt = new SimpleFormatter();
-		StreamHandler sh = new StreamHandler(System.out, fmt);
-		logger.addHandler(sh);
-		return logger;
-	}
 }

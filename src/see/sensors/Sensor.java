@@ -1,8 +1,6 @@
 package see.sensors;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import lejos.utility.Delay;
 import see.behaviours.Mode;
 import see.comm.Channel;
 import see.comm.Process;
@@ -14,15 +12,13 @@ public abstract class Sensor<T extends Event<?>> implements Process<T>, Connecta
 
 	protected Robot robot;
 	
-	protected Logger logger = Logger.getLogger("see");
-	
 	public Sensor(Robot robot) {
 		this.robot = robot;
 	}
 	
 	@Override
 	public void run() {
-		logger.info("Starting sensor: " + this.toString());
+		System.out.println("Starting sensor: " + this.toString());
 		while(true) {
 			
 			if(robot.getMode() != Mode.RECORD) {
@@ -33,15 +29,16 @@ public abstract class Sensor<T extends Event<?>> implements Process<T>, Connecta
 			try {
 				T value = read();
 				if(value.occurred()) {
-					logger.info("Reading: " + value.toString());
+					System.out.println("Reading: " + value.toString());
 				}
 				channel.write(value);
 			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Sensor read/write error", e.getCause());
+				System.err.println("Sensor read/write error: " + e.getCause());
 				break;
 			}
+			Delay.msDelay(500);
 		}
-		logger.info("Stopping sensor: " + this.toString());
+		System.out.println("Stopping sensor: " + this.toString());
 	}
 	
 	public abstract T read() throws InterruptedException;

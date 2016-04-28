@@ -1,7 +1,8 @@
 package see.robot;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class RobotRunner {
@@ -27,11 +28,19 @@ public class RobotRunner {
 	}
 	
 	static void loadRobotCfg() throws IOException {
-		final Properties properties = new Properties();
-		try (final InputStream stream = RobotRunner.class.getClass().getResourceAsStream("robot.properties")) {
-		    properties.load(stream);
+		Properties properties = new Properties();
+		File f = new File("robot.properties");
+		if (!f.exists()) {
+			return;
+		}
+		FileInputStream fis = new FileInputStream(f);
+		try {
+			properties.load(fis);
+		} finally {
+			fis.close();
 		}
 		System.setProperties(properties);
+		System.setProperty("java.home", "/home/root/lejos/programs");
+		System.out.println("Loading: " + System.getProperty("robot.type"));
 	}
-	
 }

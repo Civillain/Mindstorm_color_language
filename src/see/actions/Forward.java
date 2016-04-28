@@ -7,8 +7,8 @@ public class Forward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Forward");
-		pilot.travel(10);
+		System.out.println("Forward");
+		pilot.travel(5);
 	}
 	
 	@Override

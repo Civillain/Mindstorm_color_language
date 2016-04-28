@@ -6,7 +6,7 @@ public class MockRepeat extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Repeat");
+		System.out.println("Repeat");
 		Thread.sleep(100);
 	}
 	

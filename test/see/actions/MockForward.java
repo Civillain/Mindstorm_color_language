@@ -7,7 +7,7 @@ public class MockForward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Forward");
+		System.out.println("Forward");
 		Thread.sleep(100);
 	}
 	

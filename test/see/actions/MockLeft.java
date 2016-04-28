@@ -7,7 +7,7 @@ public class MockLeft extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Left");
+		System.out.println("Left");
 		Thread.sleep(100);
 	}
 	

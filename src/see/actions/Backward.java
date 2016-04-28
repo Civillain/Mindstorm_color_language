@@ -7,8 +7,8 @@ public class Backward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Backward");
-		pilot.travel(-10);
+		System.out.println("Backward");
+		pilot.travel(-5);
 	}
 
 	@Override

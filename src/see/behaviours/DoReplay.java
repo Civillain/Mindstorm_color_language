@@ -1,8 +1,5 @@
 package see.behaviours;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import lejos.robotics.subsumption.Behavior;
 import see.actions.Action;
 import see.comm.ChannelAction;
@@ -16,7 +13,6 @@ public class DoReplay implements Behavior {
 	private ChannelTouchPressed channelTouchPressed;
 	private ChannelAction channelAction;
 	private boolean suppressed = false;
-	private Logger logger = Logger.getLogger("see");
 	private Robot robot;
 	
 	public DoReplay(Robot robot) {
@@ -56,7 +52,7 @@ public class DoReplay implements Behavior {
 			try {
 				channelAction.write(action);
 			} catch (InterruptedException e) {
-				logger.log(Level.SEVERE, "Error while replaying: " + action.toString(), e.getCause());
+				System.err.println("Error while replaying: " + action.toString() + " "+ e.getCause());
 				break;
 			}
 		}

@@ -7,7 +7,7 @@ public class MockBackward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Backward");
+		System.out.println("Backward");
 		Thread.sleep(100);
 	}
 

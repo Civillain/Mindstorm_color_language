@@ -7,7 +7,7 @@ public class Rotate extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Rotate");
+		System.out.println("Rotate");
 		pilot.rotate(180);
 	}
 	

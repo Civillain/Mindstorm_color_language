@@ -7,7 +7,7 @@ public class Scan extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot) throws Exception {
-		logger.info("Scan");
+		System.out.println("Scan");
 		
 	}
 	

@@ -23,7 +23,7 @@ public class TouchSensor extends Sensor<TouchPressed>  {
 	
 	@Override
 	public void connect(Robot robot) {
-		logger.info("Connecting touch sensor");
+		System.out.println("Connecting touch sensor");
 		SensorMap sensorMap = robot.getSensorMap();
 		Port port = sensorMap.getPort(SensorType.TOUCH);
 		EV3TouchSensor touchSensor = new EV3TouchSensor(port);

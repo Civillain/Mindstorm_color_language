@@ -22,7 +22,7 @@ public class DistanceSensor extends Sensor<ObstacleDetected>  {
 	
 	@Override
 	public void connect(Robot robot) {
-		logger.info("Connecting IR sensor");
+		System.out.println("Connecting IR sensor");
 		SensorMap sensorMap = robot.getSensorMap();
 		Port port = sensorMap.getPort(SensorType.INFRARED);
 		EV3IRSensor irSensor = new EV3IRSensor(port);

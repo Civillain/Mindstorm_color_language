@@ -3,6 +3,7 @@ package see.sensors;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorMode;
+import lejos.robotics.Color;
 import see.comm.Channel;
 import see.comm.ChannelColorDetected;
 import see.events.ColorDetected;
@@ -21,7 +22,7 @@ public class ColorSensor extends Sensor<ColorDetected> {
 	
 	@Override
 	public void connect(Robot robot) {
-		logger.info("Connecting color sensor");
+		System.out.println("Connecting color sensor");
 		SensorMap sensorMap = robot.getSensorMap();
 		Port port = sensorMap.getPort(SensorType.COLOR);
 		EV3ColorSensor colorSensor = new EV3ColorSensor(port);
@@ -43,7 +44,12 @@ public class ColorSensor extends Sensor<ColorDetected> {
 	@Override
 	public ColorDetected read() throws InterruptedException {
 		int colorId = colorSensor.getColorID();
-		ColorDetected detected = new ColorDetected(colorId);
+		ColorDetected detected = null;
+		if(colorId == Color.NONE) {
+			detected = new ColorDetected();
+		} else {
+			detected = new ColorDetected(colorId);
+		}
 		return detected;
 	}
 }
