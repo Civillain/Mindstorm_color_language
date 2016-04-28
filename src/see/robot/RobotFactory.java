@@ -3,6 +3,7 @@ package see.robot;
 import see.actions.ActionMap;
 import see.actions.ActionMapImpl;
 import see.motors.DifferentialRobotMotor;
+import see.motors.MediumMotor;
 import see.playback.Recorder;
 import see.sensors.ColorSensor;
 import see.sensors.DistanceSensor;
@@ -20,7 +21,9 @@ public class RobotFactory {
 		DistanceSensor distanceSensor = new DistanceSensor(robot);
 		SensorMap sensorMap = new SensorMap();
 		DifferentialRobotMotor differentialRobotMotor = new DifferentialRobotMotor();
+		MediumMotor mediumMotor = new MediumMotor();
 		robot.setDifferentialRobotMotor(differentialRobotMotor);
+		robot.setMediumMotor(mediumMotor);
 		robot.setColorSensor(colorSensor);
 		robot.setDistanceSensor(distanceSensor);
 		robot.setRecorder(recorder);

@@ -1,6 +1,7 @@
 package see.behaviours;
 
 import lejos.robotics.subsumption.Behavior;
+import lejos.utility.Delay;
 import see.actions.Action;
 import see.comm.ChannelAction;
 import see.comm.ChannelTouchPressed;
@@ -34,6 +35,7 @@ public class DoReplay implements Behavior {
 				if(detected.getEvent() == TouchPress.PRESSED) {
 					control = true;
 					robot.setMode(Mode.REPLAY);
+					Delay.msDelay(2000);
 				}
 			}
 			return control;

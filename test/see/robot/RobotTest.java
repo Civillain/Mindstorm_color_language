@@ -36,7 +36,7 @@ public class RobotTest {
 		mockRobotFactory.colorQ.add(Color.GREEN);
 		mockRobotFactory.colorQ.add(Color.ORANGE);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		List<Action> actions = robot.getRecorder().getRecord();
 		assertEquals(5, actions.size());
@@ -48,7 +48,7 @@ public class RobotTest {
 		
 		mockRobotFactory.touchQ.add(TouchPress.PRESSED);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		assertTrue(actions.isEmpty());
 		
@@ -76,7 +76,7 @@ public class RobotTest {
 		mockRobotFactory.colorQ.add(Color.GREEN);
 		mockRobotFactory.colorQ.add(Color.ORANGE);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		List<Action> actions = robot.getRecorder().getRecord();
 		assertEquals(5, actions.size());
@@ -88,7 +88,7 @@ public class RobotTest {
 		
 		mockRobotFactory.touchQ.add(TouchPress.PRESSED);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		assertTrue(actions.isEmpty());
 	}
@@ -113,7 +113,7 @@ public class RobotTest {
 		mockRobotFactory.colorQ.add(Color.NONE);
 		mockRobotFactory.colorQ.add(Color.YELLOW);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		List<Action> actions = robot.getRecorder().getRecord();
 		assertEquals(3, actions.size());
@@ -123,7 +123,7 @@ public class RobotTest {
 		
 		mockRobotFactory.touchQ.add(TouchPress.PRESSED);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		assertTrue(actions.isEmpty());
 	}
@@ -145,7 +145,7 @@ public class RobotTest {
 
 		mockRobotFactory.colorQ.add(Color.BLUE);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		List<Action> actions = robot.getRecorder().getRecord();
 		assertEquals(1, actions.size());
@@ -153,7 +153,7 @@ public class RobotTest {
 		
 		mockRobotFactory.touchQ.add(TouchPress.PRESSED);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		assertTrue(actions.isEmpty());
 		
@@ -164,7 +164,7 @@ public class RobotTest {
 		mockRobotFactory.colorQ.add(Color.BLUE);
 		
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		actions = robot.getRecorder().getRecord();
 		assertEquals(1, actions.size());
@@ -172,7 +172,7 @@ public class RobotTest {
 		
 		mockRobotFactory.touchQ.add(TouchPress.PRESSED);
 		
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		
 		assertTrue(actions.isEmpty());
 	}

@@ -40,7 +40,7 @@ public class DifferentialRobotMotor implements Motor<Action> {
 		while(true) {
 			Action action = channelAction.read();
 			try {
-				action.perform(pilot);
+				action.perform(pilot, null);
 			} catch (Exception e) {
 				System.err.println("Error while performing: " + action.toString() + " " +  e.getCause());
 			}

@@ -22,17 +22,19 @@ public class ActionMapImpl implements ActionMap {
 		map.put(Color.YELLOW, ActionType.BACKWARD);
 		map.put(Color.GREEN, ActionType.FORWARD);
 		map.put(Color.ORANGE, ActionType.ROTATE);
-		map.put(Color.BLACK, ActionType.SCAN);
+		map.put(Color.PINK, ActionType.MEDIUM_RIGHT);
+		map.put(Color.MAGENTA, ActionType.MEDIUM_LEFT);
 		map.put(Color.WHITE, ActionType.TO_OBSTACLE);
-		map.put(Color.MAGENTA, ActionType.REPEAT);
-		map.put(Color.BROWN, ActionType.NO_ACTION);
+		map.put(Color.BROWN, ActionType.REPEAT);
+		map.put(Color.NONE, ActionType.NO_ACTION);
 		
 		robotActions.put(ActionType.LEFT, new Left());
 		robotActions.put(ActionType.RIGHT, new Right());
 		robotActions.put(ActionType.BACKWARD, new Backward());
 		robotActions.put(ActionType.FORWARD, new Forward());
 		robotActions.put(ActionType.ROTATE, new Rotate());
-		robotActions.put(ActionType.SCAN, new Scan());
+		robotActions.put(ActionType.MEDIUM_LEFT, new MediumLeft());
+		robotActions.put(ActionType.MEDIUM_RIGHT, new MediumRight());
 		robotActions.put(ActionType.TO_OBSTACLE, new ToObstacle());
 		robotActions.put(ActionType.REPEAT, new Repeat());
 		robotActions.put(ActionType.NO_ACTION, new NoAction());

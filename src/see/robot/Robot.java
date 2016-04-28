@@ -5,14 +5,18 @@ import java.util.List;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
+import lejos.robotics.Color;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
 import see.actions.ActionMap;
+import see.actions.ToObstacle;
 import see.behaviours.DoRecord;
 import see.behaviours.DoReplay;
 import see.behaviours.Mode;
+import see.comm.ChannelObstacleDetected;
 import see.motors.DifferentialRobotMotor;
+import see.motors.MediumMotor;
 import see.playback.Recorder;
 import see.sensors.ColorSensor;
 import see.sensors.DistanceSensor;
@@ -26,6 +30,7 @@ public final class Robot implements Connectable {
 	private DistanceSensor distanceSensor;
 	private Recorder recorder;
 	private DifferentialRobotMotor differentialRobotMotor;
+	private MediumMotor mediumMotor;
 	private List<Connectable> devices;
 	private List<Thread> processes;
 	private ActionMap actionMap;
@@ -135,6 +140,8 @@ public final class Robot implements Connectable {
 		for(Connectable device : devices ) {
 			device.connect(robot);
 		}
+		ToObstacle toObstacle = (ToObstacle) actionMap.get(Color.WHITE);
+		toObstacle.setObstacleDetected((ChannelObstacleDetected)distanceSensor.channel());
 		connected = true;
         setLEDPattern(1);
         Sound.beepSequenceUp();
@@ -185,6 +192,14 @@ public final class Robot implements Connectable {
 	private void setLEDPattern(int pattern) {
 		if(!connected) return;
 		Button.LEDPattern(pattern);
+	}
+
+	public MediumMotor getMediumMotor() {
+		return mediumMotor;
+	}
+
+	public void setMediumMotor(MediumMotor mediumMotor) {
+		this.mediumMotor = mediumMotor;
 	}
 	
 }
