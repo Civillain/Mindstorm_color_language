@@ -12,7 +12,8 @@ import see.robot.Robot;
 public class DoRecord implements Behavior {
 
 	private ChannelColorDetected channelColorDetected;
-	private ChannelAction channelAction;
+	private ChannelAction channelActionDiffPilot;
+	private ChannelAction channelActionMediumMotor;
 	private ActionMap actionMap;
 	private Recorder recorder;
 	private boolean suppressed = false;
@@ -21,7 +22,8 @@ public class DoRecord implements Behavior {
 	public DoRecord(Robot robot) {
 		super();
 		this.channelColorDetected = (ChannelColorDetected) robot.getColorSensor().channel();
-		this.channelAction = (ChannelAction) robot.getDifferentialRobotMotor().channel();
+		this.channelActionDiffPilot = (ChannelAction) robot.getDifferentialRobotMotor().channel();
+		this.channelActionMediumMotor = (ChannelAction) robot.getMediumMotor().channel();
 		this.actionMap = robot.getActionMap();
 		this.recorder = robot.getRecorder();
 		this.robot = robot;
@@ -46,7 +48,8 @@ public class DoRecord implements Behavior {
 				Action action = actionMap.get(detected.getEvent());
 				recorder.add(action);
 				try {
-					channelAction.write(action);
+					channelActionDiffPilot.write(action);
+					channelActionMediumMotor.write(action);
 				} catch (InterruptedException e) {
 					System.err.println("Error while writing: " + action.toString() + " " + e.getCause());
 					break;

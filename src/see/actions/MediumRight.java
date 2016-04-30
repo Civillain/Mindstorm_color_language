@@ -3,8 +3,12 @@ package see.actions;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.robotics.navigation.DifferentialPilot;
 
-// brown: turn head right
 public class MediumRight extends AbstractAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4425684148739082410L;
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {

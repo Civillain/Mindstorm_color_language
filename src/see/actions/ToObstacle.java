@@ -7,6 +7,10 @@ import see.events.ObstacleDetected;
 
 public class ToObstacle extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6822166686882775398L;
 	private ChannelObstacleDetected obstacleDetected;
 	
 	@Override

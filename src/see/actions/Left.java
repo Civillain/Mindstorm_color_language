@@ -3,8 +3,12 @@ package see.actions;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.robotics.navigation.DifferentialPilot;
 
-// blue: left 45 degrees
 public class Left extends AbstractAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7274174170471829819L;
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {

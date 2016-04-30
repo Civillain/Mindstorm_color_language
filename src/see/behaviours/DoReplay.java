@@ -12,14 +12,16 @@ import see.robot.Robot;
 public class DoReplay implements Behavior {
 
 	private ChannelTouchPressed channelTouchPressed;
-	private ChannelAction channelAction;
+	private ChannelAction channelActionDiffPilot;
+	private ChannelAction channelActionMediumMotor;
 	private boolean suppressed = false;
 	private Robot robot;
 	
 	public DoReplay(Robot robot) {
 		super();
 		this.channelTouchPressed = (ChannelTouchPressed) robot.getTouchSensor().channel();
-		this.channelAction = (ChannelAction) robot.getDifferentialRobotMotor().channel();
+		this.channelActionDiffPilot = (ChannelAction) robot.getDifferentialRobotMotor().channel();
+		this.channelActionMediumMotor = (ChannelAction) robot.getMediumMotor().channel();
 		this.robot = robot;
 	}
 	
@@ -52,7 +54,8 @@ public class DoReplay implements Behavior {
 				break;
 			}
 			try {
-				channelAction.write(action);
+				channelActionDiffPilot.write(action);
+				channelActionMediumMotor.write(action);
 			} catch (InterruptedException e) {
 				System.err.println("Error while replaying: " + action.toString() + " "+ e.getCause());
 				break;

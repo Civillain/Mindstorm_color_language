@@ -8,7 +8,6 @@ import see.playback.Recorder;
 import see.sensors.ColorIDColorSensor;
 import see.sensors.ColorSensor;
 import see.sensors.DistanceSensor;
-import see.sensors.RGBColorSensor;
 import see.sensors.SensorMap;
 import see.sensors.TouchSensor;
 

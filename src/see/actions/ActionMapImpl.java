@@ -21,9 +21,9 @@ public class ActionMapImpl implements ActionMap {
 		map.put(Color.RED, ActionType.RIGHT);
 		map.put(Color.GREEN, ActionType.BACKWARD);
 		map.put(Color.YELLOW, ActionType.FORWARD);
-		//map.put(Color.ORANGE, ActionType.ROTATE);
-		//map.put(Color.PINK, ActionType.MEDIUM_RIGHT);
-		//map.put(Color.MAGENTA, ActionType.MEDIUM_LEFT);
+		map.put(Color.ORANGE, ActionType.ROTATE);
+		map.put(Color.PINK, ActionType.MEDIUM_RIGHT);
+		map.put(Color.MAGENTA, ActionType.MEDIUM_LEFT);
 		map.put(Color.WHITE, ActionType.TO_OBSTACLE);
 		map.put(Color.BLACK, ActionType.REPEAT);
 		map.put(Color.NONE, ActionType.NO_ACTION);

@@ -37,6 +37,7 @@ public class MediumMotor implements Motor<Action> {
 
 	@Override
 	public void connect(Robot robot) {
+		System.out.println("Connecting medium motor");
 		String portName = robot.getProperty("motor.medium.port");
 		Port port = LocalEV3.get().getPort(portName);
 		mediumMotor = new EV3MediumRegulatedMotor(port);

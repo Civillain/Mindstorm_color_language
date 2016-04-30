@@ -1,5 +1,10 @@
 package see.playback;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,6 +36,26 @@ public class Recorder implements Iterator<Action> {
 			record.addAll(toRepeat);
 		} else {
 			record.add(action);
+		}
+	}
+	
+	public void persist() {
+		System.out.println("Persisting record");
+		try(FileOutputStream out = new FileOutputStream("record.out"); ObjectOutputStream oos = new ObjectOutputStream(out)) {
+			oos.writeObject(record);
+		    oos.flush();
+		} catch (IOException e) {
+			System.out.println("Problem serializing: " + e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void load() {
+		System.out.println("Loading record");
+		try(FileInputStream in = new FileInputStream("record.out");ObjectInputStream ois = new ObjectInputStream(in)) {
+		    this.record = (List<Action>) (ois.readObject());
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("Problem serializing: " + e);
 		}
 	}
 	

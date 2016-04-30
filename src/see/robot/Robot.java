@@ -8,7 +8,6 @@ import lejos.hardware.Sound;
 import lejos.robotics.Color;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
-import lejos.utility.Delay;
 import see.actions.ActionMap;
 import see.actions.ToObstacle;
 import see.behaviours.DoRecord;
@@ -199,6 +198,7 @@ public final class Robot implements Connectable {
 
 	public void setMediumMotor(MediumMotor mediumMotor) {
 		this.mediumMotor = mediumMotor;
+		devices.add(mediumMotor);
 	}
 	
 }

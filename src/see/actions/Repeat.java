@@ -6,6 +6,11 @@ import lejos.robotics.navigation.DifferentialPilot;
 
 public class Repeat extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8853645499075066175L;
+
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
 		System.out.println("Repeat");
