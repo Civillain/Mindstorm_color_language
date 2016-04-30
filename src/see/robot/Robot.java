@@ -145,7 +145,6 @@ public final class Robot implements Connectable {
 		connected = true;
         setLEDPattern(1);
         Sound.beepSequenceUp();
-        Delay.msDelay(1000);
 	}
 	
 	public String getProperty(String key) {

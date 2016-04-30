@@ -3,6 +3,7 @@ package see.sensors;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.SensorMode;
+import lejos.utility.Delay;
 import see.comm.Channel;
 import see.comm.ChannelTouchPressed;
 import see.events.TouchPress;
@@ -41,6 +42,7 @@ public class TouchSensor extends Sensor<TouchPressed>  {
 
 	@Override
 	public TouchPressed read() {
+		Delay.msDelay(250);
 		touchSensor.fetchSample(sample, 0);
 		TouchPressed tp = null;
 		if(sample[0] == 1.0f) {

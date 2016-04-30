@@ -1,6 +1,5 @@
 package see.sensors;
 
-import lejos.utility.Delay;
 import see.behaviours.Mode;
 import see.comm.Channel;
 import see.comm.Process;
@@ -36,7 +35,6 @@ public abstract class Sensor<T extends Event<?>> implements Process<T>, Connecta
 				System.err.println("Sensor read/write error: " + e.getCause());
 				break;
 			}
-			Delay.msDelay(500);
 		}
 		System.out.println("Stopping sensor: " + this.toString());
 	}
