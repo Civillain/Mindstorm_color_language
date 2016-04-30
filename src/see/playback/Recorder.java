@@ -18,7 +18,6 @@ public class Recorder implements Iterator<Action> {
 	
 	public void add(Action action) {
 		System.out.println("Recording: " + action.toString());
-		record.add(action);
 		if(action instanceof Repeat) {
 			List<Action> toRepeat = new ArrayList<>();
 			for(int i = record.size()-1; i >= 0; i--) {
@@ -30,6 +29,8 @@ public class Recorder implements Iterator<Action> {
 				}
 			}
 			record.addAll(toRepeat);
+		} else {
+			record.add(action);
 		}
 	}
 	
