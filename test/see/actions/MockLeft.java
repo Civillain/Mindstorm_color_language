@@ -14,7 +14,7 @@ public class MockLeft extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "Left []";
+		return "Left";
 	}
 
 }

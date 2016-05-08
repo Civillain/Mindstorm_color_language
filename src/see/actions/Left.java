@@ -12,13 +12,12 @@ public class Left extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		System.out.println("Left");
 		pilot.rotate(-90);
 	}
 	
 	@Override
 	public String toString() {
-		return "Left []";
+		return "Left";
 	}
 
 }

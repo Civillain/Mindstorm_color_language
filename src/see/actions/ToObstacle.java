@@ -15,17 +15,14 @@ public class ToObstacle extends AbstractAction {
 	
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		System.out.println("ToObstacle");
-		pilot.forward();
-		while(true) {
+		pilot.travel(-20, true);
+		while( pilot.isMoving() ) {
 			ObstacleDetected detected = obstacleDetected.read();
 			if(detected.occurred()) {
 				System.out.println("Obstacle detected");
 				pilot.stop();
-				break;
 			}
 		}
-		
 	}
 	
 	public void setObstacleDetected(ChannelObstacleDetected obstacleDetected) {
@@ -34,7 +31,7 @@ public class ToObstacle extends AbstractAction {
 
 	@Override
 	public String toString() {
-		return "ToObstacle []";
+		return "ToObstacle";
 	}
 
 }

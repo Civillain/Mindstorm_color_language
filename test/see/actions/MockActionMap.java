@@ -2,7 +2,7 @@ package see.actions;
 
 import lejos.robotics.Color;
 
-public class MockActionMap extends ActionMapImpl {
+public class MockActionMap extends ActionMapImplEV3ColorCodes {
 
 	public MockActionMap() {
 		super();

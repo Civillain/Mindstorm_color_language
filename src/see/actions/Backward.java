@@ -12,13 +12,12 @@ public class Backward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		System.out.println("Backward");
-		pilot.travel(-5);
+		pilot.travel(-20);
 	}
 
 	@Override
 	public String toString() {
-		return "Backward []";
+		return "Backward";
 	}
 
 }

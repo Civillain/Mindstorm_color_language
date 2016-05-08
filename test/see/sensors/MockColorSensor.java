@@ -5,7 +5,7 @@ import java.util.Queue;
 import see.events.ColorDetected;
 import see.robot.Robot;
 
-public class MockColorSensor extends ColorIDColorSensor {
+public class MockColorSensor extends HiTechnicColorIDColorSensor {
 	
 	private Queue<Integer> queue;
 	

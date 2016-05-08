@@ -39,6 +39,11 @@ public class Recorder implements Iterator<Action> {
 		}
 	}
 	
+	
+	public void clear() {
+		this.record.clear();
+	}
+	
 	public void persist() {
 		System.out.println("Persisting record");
 		try(FileOutputStream out = new FileOutputStream("record.out"); ObjectOutputStream oos = new ObjectOutputStream(out)) {

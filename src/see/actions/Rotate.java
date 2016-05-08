@@ -18,7 +18,7 @@ public class Rotate extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "Rotate []";
+		return "Rotate";
 	}
 
 }

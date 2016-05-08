@@ -28,8 +28,6 @@ public class DoReplay implements Behavior {
 	@Override
 	public boolean takeControl() {
 		
-		suppressed = robot.checkIfStopped();
-		
 		if(robot.getMode() != Mode.REPLAY) {
 			boolean control = false;
 			TouchPressed detected = channelTouchPressed.read(); 

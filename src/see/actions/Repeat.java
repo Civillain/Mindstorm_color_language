@@ -13,13 +13,12 @@ public class Repeat extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		System.out.println("Repeat");
 		Sound.beep();
 	}
 	
 	@Override
 	public String toString() {
-		return "Repeat []";
+		return "Repeat";
 	}
 
 }

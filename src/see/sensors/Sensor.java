@@ -27,9 +27,9 @@ public abstract class Sensor<T extends Event<?>> implements Process<T>, Connecta
 			Channel<T> channel = channel();
 			try {
 				T value = read();
-				if(value.occurred()) {
-					System.out.println("Reading: " + value.toString());
-				}
+				//if(value.occurred()) {
+				//	System.out.println("Reading: " + value.toString());
+				//}
 				channel.write(value);
 			} catch (Exception e) {
 				System.err.println("Sensor read/write error: " + e.getCause());

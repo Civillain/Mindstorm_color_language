@@ -15,7 +15,7 @@ public class MockForwardWithError extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "Forward []";
+		return "Forward";
 	}
 
 }

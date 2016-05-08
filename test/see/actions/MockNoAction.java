@@ -12,7 +12,7 @@ public class MockNoAction extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "NoAction []";
+		return "NoAction";
 	}
 
 }

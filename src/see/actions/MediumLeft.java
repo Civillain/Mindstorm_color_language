@@ -18,7 +18,7 @@ public class MediumLeft extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "MediumLeft []";
+		return "MediumLeft";
 	}
 
 }

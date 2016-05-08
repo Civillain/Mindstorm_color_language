@@ -5,15 +5,10 @@ import java.util.List;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
-import lejos.robotics.Color;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 import see.actions.ActionMap;
-import see.actions.ToObstacle;
-import see.behaviours.DoRecord;
-import see.behaviours.DoReplay;
 import see.behaviours.Mode;
-import see.comm.ChannelObstacleDetected;
 import see.motors.DifferentialRobotMotor;
 import see.motors.MediumMotor;
 import see.playback.Recorder;
@@ -37,6 +32,7 @@ public final class Robot implements Connectable {
 	private Mode mode = Mode.IDLE;
 	private static Robot ROBOT = null;
 	private boolean connected = false;
+	private List<Behavior> behaviors;
 	
 	public static synchronized Robot create() {
 		if(ROBOT == null) {
@@ -48,6 +44,7 @@ public final class Robot implements Connectable {
 	private Robot() {
 		this.devices = new ArrayList<>();
 		this.processes = new ArrayList<>();
+		this.behaviors = new ArrayList<>();
 	}
 	
 	public void start() {
@@ -62,9 +59,7 @@ public final class Robot implements Connectable {
 		for(Thread t : processes) {
 			t.start();
 		}
-		Behavior doRecord = new DoRecord(this);
-		Behavior doReplay = new DoReplay(this);
-		Behavior [] behaviors = new Behavior [] {doRecord, doReplay};
+		Behavior [] behaviors = this.behaviors.toArray(new Behavior[this.behaviors.size()]);
 		Arbitrator arbitrator = new Arbitrator(behaviors);
 		arbitrator.start();
 		System.out.println("Arbitrator finished");
@@ -139,8 +134,6 @@ public final class Robot implements Connectable {
 		for(Connectable device : devices ) {
 			device.connect(robot);
 		}
-		ToObstacle toObstacle = (ToObstacle) actionMap.get(Color.WHITE);
-		toObstacle.setObstacleDetected((ChannelObstacleDetected)distanceSensor.channel());
 		connected = true;
         setLEDPattern(1);
         Sound.beepSequenceUp();
@@ -169,18 +162,17 @@ public final class Robot implements Connectable {
 	
 	public synchronized boolean checkIfStopped() {
 		if(!connected) return false;
-		if (Button.readButtons() != 0) {
+		if (Button.readButtons() == Button.ID_ESCAPE) {
 			System.out.println("Stopping motors");
 	        getDifferentialRobotMotor().stop();
 	        setLEDPattern(8); // fast blink red
-	        Button.discardEvents();
-	        if ((Button.waitForAnyPress() & Button.ID_ESCAPE) != 0) {
+	        if ((Button.waitForAnyPress(250) & Button.ID_ESCAPE) != 0) {
 	        	System.out.println("Stopping robot");
 	        	Sound.beepSequence();
 	        	setLEDPattern(0); // clear leds
 	        	System.exit(0);
 	        }
-	        Button.waitForAnyEvent();
+	        setLEDPattern(2);
 	        return true;
 	    } else {
 	    	return false;
@@ -199,6 +191,10 @@ public final class Robot implements Connectable {
 	public void setMediumMotor(MediumMotor mediumMotor) {
 		this.mediumMotor = mediumMotor;
 		devices.add(mediumMotor);
+	}
+
+	public void addBehavior(Behavior behavior) {
+		this.behaviors.add(behavior);
 	}
 	
 }

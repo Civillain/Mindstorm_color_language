@@ -4,7 +4,6 @@ import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.SampleProvider;
-import lejos.robotics.filter.MeanFilter;
 import see.comm.Channel;
 import see.comm.ChannelObstacleDetected;
 import see.events.ObstacleDetected;
@@ -15,7 +14,7 @@ public class DistanceSensor extends Sensor<ObstacleDetected>  {
 	private ChannelObstacleDetected channelObstacleDetcted;
 	private SampleProvider irSensor;
 	private float[] sample;
-	private float distanceToDetectObstacle = 0.2f; // 1.0f equals roughly 1 meter
+	private float distanceToDetectObstacle = 50.0f; // 1.0f equals roughly 1 meter
 	
 	public DistanceSensor(Robot robot) {
 		super(robot);
@@ -30,8 +29,7 @@ public class DistanceSensor extends Sensor<ObstacleDetected>  {
 		EV3IRSensor irSensor = new EV3IRSensor(port);
 		SensorMode sensorMode = irSensor.getDistanceMode();
 		irSensor.setCurrentMode(sensorMode.getName());
-		SampleProvider filter = new MeanFilter(irSensor, 10);
-		this.irSensor = filter;
+		this.irSensor = irSensor;
 		int sampleSize = irSensor.sampleSize();
 		this.sample = new float[sampleSize];
 	}

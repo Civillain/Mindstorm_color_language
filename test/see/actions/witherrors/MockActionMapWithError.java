@@ -5,7 +5,7 @@ import java.util.Map;
 
 import lejos.robotics.Color;
 import see.actions.Action;
-import see.actions.ActionMapImpl;
+import see.actions.ActionMapImplEV3ColorCodes;
 import see.actions.ActionType;
 import see.actions.MockBackward;
 import see.actions.MockLeft;
@@ -13,7 +13,7 @@ import see.actions.MockNoAction;
 import see.actions.MockRight;
 import see.actions.MockRotate;
 
-public class MockActionMapWithError extends ActionMapImpl {
+public class MockActionMapWithError extends ActionMapImplEV3ColorCodes {
 
 	private Map<Integer, ActionType> map;
 	private Map<ActionType, Action> robotActions;

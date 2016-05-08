@@ -14,7 +14,7 @@ public class MockRotate extends AbstractAction {
 	
 	@Override
 	public String toString() {
-		return "Rotate []";
+		return "Rotate";
 	}
 
 }
