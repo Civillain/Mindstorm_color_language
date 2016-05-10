@@ -15,7 +15,7 @@ public class ToObstacle extends AbstractAction {
 	
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		pilot.travel(-20, true);
+		pilot.travel(-30, true);
 		while( pilot.isMoving() ) {
 			ObstacleDetected detected = obstacleDetected.read();
 			if(detected.occurred()) {

@@ -12,7 +12,7 @@ public class Backward extends AbstractAction {
 
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		pilot.travel(-20);
+		pilot.travel(30);
 	}
 
 	@Override
