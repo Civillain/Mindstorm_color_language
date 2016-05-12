@@ -31,7 +31,7 @@ public class ToObstacle extends AbstractAction {
 
 	@Override
 	public String toString() {
-		return "ToObstacle";
+		return "Forward";
 	}
 
 }
