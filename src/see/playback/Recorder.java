@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import see.actions.Action;
+import see.actions.NoAction;
 import see.actions.Repeat;
 
 public class Recorder implements Iterator<Action> {
@@ -22,7 +23,10 @@ public class Recorder implements Iterator<Action> {
 	}
 	
 	public void add(Action action) {
-		System.out.println("Recording: " + action.toString());
+		if(action instanceof NoAction) {
+			return;
+		}
+		System.out.println(action.toString());
 		if(action instanceof Repeat) {
 			List<Action> toRepeat = new ArrayList<>();
 			for(int i = record.size()-1; i >= 0; i--) {
