@@ -43,7 +43,7 @@ public class DoReplayKraz3 implements Behavior {
 			}
 			return control;
 		} else {
-			return true;
+			return !suppressed;
 		}
 	}
 
