@@ -145,12 +145,13 @@ public final class Robot implements Connectable {
 	}
 
 	public synchronized void setMode(Mode mode) {
-		System.out.println("Mode: " + mode.toString());
 		this.mode = mode;
 		if(mode == Mode.RECORD) {
 			setLEDPattern(2); // static red 
+			System.out.println("Mode: " + mode.toString());
 		} else if (mode == Mode.REPLAY) {
 			setLEDPattern(4); // blink green
+			System.out.println("Mode: " + mode.toString());
 		} else {
 			setLEDPattern(3); // static yellow
 		}
@@ -163,17 +164,24 @@ public final class Robot implements Connectable {
 	public synchronized boolean checkIfStopped() {
 		if(!connected) return false;
 		if (Button.readButtons() == Button.ID_ESCAPE) {
-			System.out.println("Stopping motors");
-	        getDifferentialRobotMotor().stop();
-	        setLEDPattern(8); // fast blink red
-	        if ((Button.waitForAnyPress(250) & Button.ID_ESCAPE) != 0) {
-	        	System.out.println("Stopping robot");
-	        	Sound.beepSequence();
-	        	setLEDPattern(0); // clear leds
-	        	System.exit(0);
-	        }
-	        setLEDPattern(2);
-	        return true;
+			if(mode == Mode.REPLAY) {
+				setLEDPattern(8); // fast blink red
+				System.out.println("Stopping motors");
+		        getDifferentialRobotMotor().stop();
+		        return true;
+			} else if (mode == Mode.RECORD) {
+				System.out.println("Clearing record");
+				recorder.clear();
+				Button.discardEvents();
+		        if ((Button.waitForAnyPress(500) & Button.ID_ESCAPE) != 0) {
+		        	System.out.println("Stopping robot");
+		        	Sound.beepSequence();
+		        	setLEDPattern(0); // clear leds
+		        	System.exit(0);
+		        }
+		        setLEDPattern(2);
+			}
+			return true;
 	    } else {
 	    	return false;
 	    }
