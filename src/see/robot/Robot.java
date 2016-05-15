@@ -168,7 +168,6 @@ public final class Robot implements Connectable {
 				setLEDPattern(8); // fast blink red
 				System.out.println("Stopping motors");
 		        getDifferentialRobotMotor().stop();
-		        return true;
 			} else if (mode == Mode.RECORD) {
 				System.out.println("Clearing record");
 				recorder.clear();
