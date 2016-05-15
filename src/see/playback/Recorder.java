@@ -37,6 +37,8 @@ public class Recorder implements Iterator<Action> {
 					break;
 				}
 			}
+			record.add(action);
+			Collections.reverse(toRepeat);
 			record.addAll(toRepeat);
 		} else {
 			record.add(action);
