@@ -7,6 +7,7 @@ import see.actions.MockActionMap;
 import see.actions.witherrors.MockActionMapWithError;
 import see.events.TouchPress;
 import see.motors.DifferentialRobotMotor;
+import see.motors.MediumMotor;
 import see.playback.Recorder;
 import see.sensors.MockColorSensor;
 import see.sensors.MockDistanceSensor;
@@ -36,8 +37,9 @@ public class MockRobotFactory {
 		MockTouchSensor touchSensor = new MockTouchSensor(robot, touchQ);
 		MockDistanceSensor distanceSensor = new MockDistanceSensor(robot, distQ);
 		DifferentialRobotMotor differentialRobotMotor = new DifferentialRobotMotor();
-		
+		MediumMotor mediumMotor = new MediumMotor();
 		robot.setDifferentialRobotMotor(differentialRobotMotor);
+		robot.setMediumMotor(mediumMotor);
 		robot.setColorSensor(colorSensor);
 		robot.setDistanceSensor(distanceSensor);
 		robot.setRecorder(recorder);
