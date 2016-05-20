@@ -15,12 +15,15 @@ public class ToObstacle extends AbstractAction {
 	
 	@Override
 	public void perform(DifferentialPilot pilot, EV3MediumRegulatedMotor mediumMotor) throws Exception {
-		pilot.travel(-30, true);
-		while( pilot.isMoving() ) {
-			ObstacleDetected detected = obstacleDetected.read();
-			if(detected.occurred()) {
-				System.out.println("Obstacle detected");
-				pilot.stop();
+		ObstacleDetected detected = obstacleDetected.read(); // check if there is an obstacle in front before moving
+		if(!detected.occurred()) {
+			pilot.travel(-30, true);
+			while( pilot.isMoving() ) {
+				ObstacleDetected detected = obstacleDetected.read();
+				if(detected.occurred()) {
+					System.out.println("Obstacle detected");
+					pilot.quickStop();
+				}
 			}
 		}
 	}
