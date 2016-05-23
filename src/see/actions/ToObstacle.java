@@ -19,7 +19,7 @@ public class ToObstacle extends AbstractAction {
 		if(!detected.occurred()) {
 			pilot.travel(-30, true);
 			while( pilot.isMoving() ) {
-				ObstacleDetected detected = obstacleDetected.read();
+				detected = obstacleDetected.read();
 				if(detected.occurred()) {
 					System.out.println("Obstacle detected");
 					pilot.quickStop();
